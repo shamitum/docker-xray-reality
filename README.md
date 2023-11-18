@@ -1,8 +1,5 @@
-# docker-xray
+# docker-xray-Reality
 Deploy xray into docker. For personal usage.
-
-Github: https://github.com/benjaminyin01/docker-xray  
-Docker: https://hub.docker.com/r/iamybj/docker-xray
 
 
 ##  Environment variables:  
@@ -30,10 +27,10 @@ For example:
     }]
 }
 ```
-If you want to use the vless+websocket solution, you can set 3 variables:  
+If you want to use the vless+gRPC+Reality solution, you can set 3 variables:  
 PORT : Listen port, default 443  
 ID : vless ID, default d42e30bc-f02c-40c1-92b9-883739bf0dcf  
-WSPATH: websocket path, default /index.html
+SNI: Costom SNI, default twitter.com
 
 The config.json template:  
 ```
