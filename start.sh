@@ -8,13 +8,7 @@ wget https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zi
 unzip ./Xray-linux-64.zip
 rm ./Xray-linux-64.zip
 
-if test -z "$CONFIG"
-then
-    PORT=${PORT:-2083}
-    ID=${ID:-"d42e30bc-f02c-40c1-92b9-883739bf0dcf"}
-    SNI=${SNI:-"twitter.com"}
-    
-    cat > ./config.json <<EOF
+cat > ./config.json <<EOF
 {
   "api": {
     "services": [
@@ -28,15 +22,26 @@ then
   "fakeDns": null,
   "inbounds": [
     {
+      "listen": "127.0.0.1",
+      "port": 62789,
+      "protocol": "dokodemo-door",
+      "settings": {
+        "address": "127.0.0.1"
+      },
+      "sniffing": null,
+      "streamSettings": null,
+      "tag": "api"
+    },
+    {
       "listen": null,
-      "port": ${PORT},
+      "port": 2053,
       "protocol": "vless",
       "settings": {
         "clients": [
           {
             "email": "DSI",
             "flow": "",
-            "id": "${ID}"
+            "id": "40b1623c-6cfe-44ef-b6f6-3e9aefc1f0c7"
           }
         ],
         "decryption": "none",
@@ -58,17 +63,17 @@ then
         },
         "network": "grpc",
         "realitySettings": {
-          "dest": "${SNI}:443",
+          "dest": "twitter.com:443",
           "maxClient": "",
           "maxTimediff": 0,
           "minClient": "",
-          "privateKey": "YMxPCNI7tdE_DEeQJ6zUsxqxXwrP_dKrZRiVbqCTYVY",
+          "privateKey": "MC2OdYBuZCD3AtvAsDcJFrf0Lc4htF-uF9tKY86UwVw",
           "serverNames": [
-            "${SNI}"
+            "twitter.com"
           ],
           "settings": {
             "fingerprint": "chrome",
-            "publicKey": "7SKzmBUoSMBTbm8P1pEXnA4ERSKp6hrwLXSh2ZnH3Hc",
+            "publicKey": "MsWfgqMBMloiddLA4IRn3VOh-wwmnzDgbAurmGGxZWY",
             "serverName": "",
             "spiderX": "/"
           },
@@ -141,8 +146,5 @@ then
   "transport": null
 }
 EOF
-else
-    echo "$CONFIG" > ./config.json
-fi
 
- ./xray -c ./config.json
+./xray -c ./config.json
