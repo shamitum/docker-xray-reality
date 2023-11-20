@@ -34,7 +34,7 @@ cat > ./config.json <<EOF
     },
     {
       "listen": null,
-      "port": 2083,
+      "port": 443,
       "protocol": "vless",
       "settings": {
         "clients": [
